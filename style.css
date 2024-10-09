@@ -1,0 +1,34 @@
+/* Button full width */
+.card-footer .btn {
+    width: 100%;
+}
+
+/* Pet type-specific button colors */
+.btn-cat {
+    background-color: #cce5ff;
+    color: #0056b3;
+}
+.btn-dog {
+    background-color: #d4edda;
+    color: #155724;
+}
+.btn-dino {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Rounded image style */
+img {
+    border-radius: 50%;
+}
+
+.card-body {
+    min-height: 250px;
+}
+
+/* Let Bootstrap handle the card layout */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
