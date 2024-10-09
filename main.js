@@ -13,7 +13,7 @@ const pets = [
       color: "Brown",
       specialSkill: "Just picks the tomatoes off of a sandwich instead of requesting a whole new sandwich.",
       type: "dino",
-      imageUrl: "http://www.jozilife.co.za/wp-content/uploads/The-Dino-Expo.jpg",
+      imageUrl: "https://unsplash.com/photos/three-dogs-standing-on-a-porch-with-a-bench-in-the-background-HZQC3rEm6JY",
     },
     {
       id: 3,
@@ -240,3 +240,44 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
+
+  const petContainer = document.getElementById("pet-cards");
+
+  const renderPets = () => {
+    pets.forEach(pet => {
+      // Create card container with 3-column layout
+      const card = document.createElement("div");
+      card.classList.add("col-md-4", "mb-4");
+  
+      // Choose button class based on pet type
+      const buttonClass = `btn-${pet.type.toLowerCase()}`;
+  
+      // Create card HTML
+      card.innerHTML = `
+  <div class="card">
+    <div class="card-header text-center font-weight-bold">${pet.name}</div>
+    <div class="card-body text-center">
+      <img 
+        src="${pet.imageUrl}" 
+        alt="${pet.name}" 
+        class="img-fluid mb-3" 
+        style="max-height: 150px; object-fit: cover; border-radius: 50%;"
+        onerror="this.src='myDog.jpeg';" 
+      >
+      <p><strong>Color:</strong> ${pet.color}</p>
+      <p><strong>Special Skill:</strong> ${pet.specialSkill}</p>
+    </div>
+    <div class="card-footer text-center">
+      <button class="btn ${buttonClass}">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</button>
+    </div>
+  </div>
+`;
+  
+      // Append card to the container
+      petContainer.appendChild(card);
+    });
+  };
+  
+  // Call the function to render pets
+  renderPets();
+  
