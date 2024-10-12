@@ -1,34 +1,51 @@
-/* Button full width */
-.card-footer .btn {
-    width: 100%;
+/* Center the button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+    margin-bottom: 20px;
+}
+
+/* General button styling */
+#all, #cats, #dogs, #dinos {
+    padding: 10px 20px; /* Add padding to make buttons larger */
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    min-width: 100px; /* Consistent button width */
+    text-align: center;
 }
 
 /* Pet type-specific button colors */
-.btn-cat {
+.btn-cat, #cats, .label-cat {
     background-color: #cce5ff;
     color: #0056b3;
 }
-.btn-dog {
+
+.btn-dog, #dogs ,.label-dog {
     background-color: #d4edda;
     color: #155724;
 }
-.btn-dino {
+
+.btn-dino, #dinos, .label-dino {
     background-color: #fff3cd;
     color: #856404;
 }
 
-/* Rounded image style */
-img {
-    border-radius: 50%;
+/* Additional hover and responsive adjustments */
+#all:hover, #cats:hover, #dogs:hover, #dinos:hover {
+    opacity: 0.9;
+    transition: 0.3s;
 }
 
-.card-body {
-    min-height: 250px;
+/* foother */
+.label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    color: inherit;
 }
 
-/* Let Bootstrap handle the card layout */
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}

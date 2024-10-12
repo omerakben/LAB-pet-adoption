@@ -233,7 +233,7 @@ const pets = [
     },
     {
         id: 30,
-      name: "Lucy",
+      name: "Test",
       color: "Red",
       specialSkill: "Doesn’t get weirded out by the word “moist.”",
       type: "dino",
@@ -243,41 +243,38 @@ const pets = [
 
   const petContainer = document.getElementById("pet-cards");
 
-  const renderPets = () => {
+  const renderPets = (type = "all") => {
+    petContainer.innerHTML = "";
+  
     pets.forEach(pet => {
-      // Create card container with 3-column layout
-      const card = document.createElement("div");
-      card.classList.add("col-md-4", "mb-4");
+      if (type === "all" || pet.type.toLowerCase() === type) {
+        const card = document.createElement("div");
+        card.classList.add("col-md-4", "mb-4");
   
-      // Choose button class based on pet type
-      const buttonClass = `btn-${pet.type.toLowerCase()}`;
-  
-      // Create card HTML
-      card.innerHTML = `
-  <div class="card">
-    <div class="card-header text-center font-weight-bold">${pet.name}</div>
-    <div class="card-body text-center">
-      <img 
-        src="${pet.imageUrl}" 
-        alt="${pet.name}" 
-        class="img-fluid mb-3" 
-        style="max-height: 150px; object-fit: cover; border-radius: 50%;"
-        onerror="this.src='myDog.jpeg';" 
-      >
-      <p><strong>Color:</strong> ${pet.color}</p>
-      <p><strong>Special Skill:</strong> ${pet.specialSkill}</p>
-    </div>
-    <div class="card-footer text-center">
-      <button class="btn ${buttonClass}">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</button>
-    </div>
-  </div>
-`;
-  
-      // Append card to the container
-      petContainer.appendChild(card);
+        const labelClass = `label-${pet.type.toLowerCase()}`;
+        card.innerHTML = `
+          <div class="card">
+            <div class="card-header text-center font-weight-bold">${pet.name}</div>
+            <div class="card-body text-center">
+              <img src="${pet.imageUrl}" alt="${pet.name}" class="img-fluid mb-3" style="max-height: 150px; object-fit: cover; border-radius: 50%;" onerror="this.src='myDog.jpeg';">
+              <p><strong>Color:</strong> ${pet.color}</p>
+              <p><strong>Special Skill:</strong> ${pet.specialSkill}</p>
+            </div>
+            <div class="card-footer text-center">
+              <span class="label ${labelClass}">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</span>
+            </div>
+          </div>
+        `;
+        petContainer.appendChild(card);
+      }
     });
   };
   
-  // Call the function to render pets
-  renderPets();
+  // Event listeners for filtering
+  document.getElementById("all").addEventListener("click", () => renderPets("all"));
+  document.getElementById("cats").addEventListener("click", () => renderPets("cat"));
+  document.getElementById("dogs").addEventListener("click", () => renderPets("dog"));
+  document.getElementById("dinos").addEventListener("click", () => renderPets("dino"));
   
+  // Initial render of all pets
+  renderPets();
