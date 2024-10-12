@@ -235,7 +235,7 @@ const pets = [
         id: 30,
       name: "Test",
       color: "Red",
-      specialSkill: "Doesn’t get weirded out by the word “moist.”",
+      specialSkill: "Doesn’t get weirder out by the word “moist.”",
       type: "dino",
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
@@ -243,6 +243,17 @@ const pets = [
 
   const petContainer = document.getElementById("pet-cards");
 
+  const getErrorImage = (type) => {
+    switch (type) {
+      case "cat":
+        return "./myCat.png"; 
+      case "dog":
+        return "./myDog.png";
+      case "dino":
+        return "./myDino.png";
+    }
+  };
+  
   const renderPets = (type = "all") => {
     petContainer.innerHTML = "";
   
@@ -253,17 +264,18 @@ const pets = [
   
         const labelClass = `label-${pet.type.toLowerCase()}`;
         card.innerHTML = `
-          <div class="card">
-            <div class="card-header text-center font-weight-bold">${pet.name}</div>
-            <div class="card-body text-center">
-              <img src="${pet.imageUrl}" alt="${pet.name}" class="img-fluid mb-3" style="max-height: 150px; object-fit: cover; border-radius: 50%;" onerror="this.src='myDog.jpeg';">
-              <p><strong>Color:</strong> ${pet.color}</p>
-              <p><strong>Special Skill:</strong> ${pet.specialSkill}</p>
-            </div>
-            <div class="card-footer text-center">
-              <span class="label ${labelClass}">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</span>
-            </div>
+           <div class="card">
+          <div class="card-header text-center font-weight-bold">${pet.name}</div>
+          <div class="card-body text-center">
+            <img src="${pet.imageUrl}" alt="${pet.name}" class="img-fluid mb-3" style="max-height: 150px; object-fit: cover; border-radius: 50%;" 
+                 onerror="this.src='${getErrorImage(pet.type)}';">
+            <p><strong>Color:</strong> ${pet.color}</p>
+            <p><strong>Special Skill:</strong> ${pet.specialSkill}</p>
           </div>
+          <div class="card-footer text-center">
+            <span class="label ${labelClass}">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</span>
+          </div>
+        </div>
         `;
         petContainer.appendChild(card);
       }
