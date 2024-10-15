@@ -1,4 +1,4 @@
-const pets = [
+let pets = [
     {
       id: 1,
       name: "Dusty",
@@ -306,27 +306,27 @@ const pets = [
   };
 
   // Function to add a new pet
-  const addPet = () => {
-    // Prompt user for pet details
+  const addPet = (event) => {
+    event.preventDefault();
     const newPet = {
       id: pets.length + 1,
-      name: prompt("Enter pet name:"),
-      color: prompt("Enter pet color:"),
-      specialSkill: prompt("Enter pet's special skill:"),
-      type: prompt("Enter pet type (cat, dog, or dino):").toLowerCase(),
-      imageUrl: prompt("Enter image URL:")
+      name: document.getElementById('pet-name').value,
+      color: document.getElementById('pet-color').value,
+      specialSkill: document.getElementById('pet-skill').value,
+      type: document.getElementById('pet-type').value,
+      imageUrl: document.getElementById('pet-image').value
     };
 
-    // Check if all fields are filled
-    if (newPet.name && newPet.color && newPet.specialSkill && newPet.type && newPet.imageUrl) {
-      // Add the new pet to the array
-      pets.push(newPet);
-      // Re-render the pet cards
-      renderPets();
-    } else {
-      // Alert user if any field is missing
-      alert("All fields are required. Pet was not added.");
-    }
+    pets.push(newPet);
+    renderPets();
+    document.getElementById('pet-form').reset();
+    document.getElementById('add-pet-form').style.display = 'none';
+  };
+
+  // Function to toggle the add pet form
+  const toggleAddForm = () => {
+    const form = document.getElementById('add-pet-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
   };
 
   // Add event listeners for filtering buttons
@@ -334,9 +334,8 @@ const pets = [
   document.getElementById("cats").addEventListener("click", () => renderPets("cat"));
   document.getElementById("dogs").addEventListener("click", () => renderPets("dog"));
   document.getElementById("dinos").addEventListener("click", () => renderPets("dino"));
-
-  // Add event listener for adding a pet
-  document.getElementById("add-pet").addEventListener("click", addPet);
+  document.getElementById("show-add-form").addEventListener("click", toggleAddForm);
+  document.getElementById("pet-form").addEventListener("submit", addPet);
 
   // Initial render of all pets
   renderPets();

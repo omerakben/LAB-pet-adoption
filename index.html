@@ -14,8 +14,40 @@
             <button id="cats" class="btn btn-info">Cats</button>
             <button id="dogs" class="btn btn-success">Dogs</button>
             <button id="dinos" class="btn btn-warning">Dinos</button>
-            <button id="add-pet" class="btn btn-primary">Add Pet</button>
+            <button id="show-add-form" class="btn btn-primary">Add Pet</button>
         </div>        
+        <div id="add-pet-form" class="mb-4" style="display: none;">
+            <h3>Add New Pet</h3>
+            <form id="pet-form">
+                <div class="mb-3">
+                    <label for="pet-name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="pet-name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pet-color" class="form-label">Color</label>
+                    <input type="text" class="form-control" id="pet-color" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pet-skill" class="form-label">Special Skill</label>
+                    <input type="text" class="form-control" id="pet-skill" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pet-type" class="form-label">Type</label>
+                    <select class="form-select" id="pet-type" required>
+                        <option value="">Choose...</option>
+                        <option value="cat">Cat</option>
+                        <option value="dog">Dog</option>
+                        <option value="dino">Dino</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="pet-image" class="form-label">Image URL</label>
+                    <p>https://picsum.photos/200/300</p>
+                    <input type="url" class="form-control" id="pet-image" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
         <div id="pet-cards" class="row"></div>
     </div>
     <script src="main.js"></script>
