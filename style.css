@@ -6,7 +6,7 @@
     margin-bottom: 20px;
 }
 
-/* General button styling */
+/* General button styling for filter buttons */
 #all, #cats, #dogs, #dinos {
     padding: 10px 20px; /* Add padding to make buttons larger */
     font-size: 16px;
@@ -16,29 +16,32 @@
     text-align: center;
 }
 
-/* Pet type-specific button colors */
+/* Pet type-specific button and label colors */
+/* Cat-related elements */
 .btn-cat, #cats, .label-cat {
     background-color: #cce5ff;
     color: #0056b3;
 }
 
+/* Dog-related elements */
 .btn-dog, #dogs ,.label-dog {
     background-color: #d4edda;
     color: #155724;
 }
 
+/* Dino-related elements */
 .btn-dino, #dinos, .label-dino {
     background-color: #fff3cd;
     color: #856404;
 }
 
-/* Additional hover and responsive adjustments */
+/* Hover effect for filter buttons */
 #all:hover, #cats:hover, #dogs:hover, #dinos:hover {
     opacity: 0.9;
     transition: 0.3s;
 }
 
-/* foother */
+/* Styling for pet type labels in pet cards */
 .label {
     display: inline-block;
     padding: 5px 10px;
@@ -48,4 +51,3 @@
     width: 100%;
     color: inherit;
 }
-
