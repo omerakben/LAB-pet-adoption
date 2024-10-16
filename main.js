@@ -1,4 +1,4 @@
-const pets = [
+let pets = [
     {
       id: 1,
       name: "Dusty",
@@ -131,7 +131,7 @@ const pets = [
      id: 17,
       name: "Muffin",
       color: "Yellow",
-      specialSkill: "Does not freak out if you haven’t seen his favorite movie (The Big Lebowski).",
+      specialSkill: "Does not freak out if you haven’t seen his favorite movie (The Big Elbows).",
       type: "cat",
       imageUrl: "http://www.funnycatsite.com/pictures/Close_Up_Yawn.jpg"
     },
@@ -217,7 +217,7 @@ const pets = [
     },
     {
         id: 28,
-      name: "Nala",
+      name: "Naca",
       color: "Purple",
       specialSkill: "Dances when he has to.",
       type: "cat",
@@ -241,8 +241,10 @@ const pets = [
     }
   ];
 
+  // Get the container element for pet cards
   const petContainer = document.getElementById("pet-cards");
 
+  // Function to get the appropriate error image based on pet type
   const getErrorImage = (type) => {
     switch (type) {
       case "cat":
@@ -254,15 +256,19 @@ const pets = [
     }
   };
   
+  // Function to render pet cards based on selected type
   const renderPets = (type = "all") => {
+    // Clear existing pet cards
     petContainer.innerHTML = "";
   
+    // Loop through each pet and create a card if it matches the selected type
     pets.forEach(pet => {
       if (type === "all" || pet.type.toLowerCase() === type) {
         const card = document.createElement("div");
         card.classList.add("col-md-4", "mb-4");
   
         const labelClass = `label-${pet.type.toLowerCase()}`;
+        // Create HTML structure for the pet card
         card.innerHTML = `
            <div class="card">
           <div class="card-header text-center font-weight-bold">${pet.name}</div>
@@ -271,22 +277,65 @@ const pets = [
                  onerror="this.src='${getErrorImage(pet.type)}';">
             <p><strong>Color:</strong> ${pet.color}</p>
             <p><strong>Special Skill:</strong> ${pet.specialSkill}</p>
+            <button class="btn btn-danger delete-pet" data-id="${pet.id}">Delete</button>
           </div>
           <div class="card-footer text-center">
             <span class="label ${labelClass}">${pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}</span>
           </div>
         </div>
         `;
+        // Append the card to the container
         petContainer.appendChild(card);
       }
     });
+
+    // Add event listeners for delete buttons
+    document.querySelectorAll('.delete-pet').forEach(button => {
+      button.addEventListener('click', deletePet);
+    });
   };
-  
-  // Event listeners for filtering
+
+  // Function to delete a pet
+  const deletePet = (event) => {
+    // Get the pet ID from the clicked button
+    const petId = parseInt(event.target.getAttribute('data-id'));
+    // Remove the pet from the array
+    pets = pets.filter(pet => pet.id !== petId);
+    // Re-render the pet cards
+    renderPets();
+  };
+
+  // Function to add a new pet
+  const addPet = (event) => {
+    event.preventDefault();
+    const newPet = {
+      id: pets.length + 1,
+      name: document.getElementById('pet-name').value,
+      color: document.getElementById('pet-color').value,
+      specialSkill: document.getElementById('pet-skill').value,
+      type: document.getElementById('pet-type').value,
+      imageUrl: document.getElementById('pet-image').value
+    };
+
+    pets.push(newPet);
+    renderPets();
+    document.getElementById('pet-form').reset();
+    document.getElementById('add-pet-form').style.display = 'none';
+  };
+
+  // Function to toggle the add pet form
+  const toggleAddForm = () => {
+    const form = document.getElementById('add-pet-form');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  };
+
+  // Add event listeners for filtering buttons
   document.getElementById("all").addEventListener("click", () => renderPets("all"));
   document.getElementById("cats").addEventListener("click", () => renderPets("cat"));
   document.getElementById("dogs").addEventListener("click", () => renderPets("dog"));
   document.getElementById("dinos").addEventListener("click", () => renderPets("dino"));
-  
+  document.getElementById("show-add-form").addEventListener("click", toggleAddForm);
+  document.getElementById("pet-form").addEventListener("submit", addPet);
+
   // Initial render of all pets
   renderPets();
